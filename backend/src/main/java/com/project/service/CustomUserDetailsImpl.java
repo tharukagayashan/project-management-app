@@ -22,10 +22,10 @@ public class CustomUserDetailsImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws RuntimeException {
         Optional<User> optUser = userDao.findByEmail(username);
         if (optUser.isEmpty()){
-            throw new UsernameNotFoundException("User not found with email: " + username);
+            throw new RuntimeException("User not found with email: " + username);
         } else {
             User user = optUser.get();
 
